@@ -1,6 +1,6 @@
 package com.karstenfischer.room.roomdatabasegithubtest;
 
-//Das hier ist die Entity
+//Das hier ist die Entity (Eine Tabelle in der...)
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
