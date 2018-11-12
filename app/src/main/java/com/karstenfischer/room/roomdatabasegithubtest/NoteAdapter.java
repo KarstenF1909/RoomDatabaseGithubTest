@@ -35,6 +35,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         return notes.size();
     }
 
+    public void setNotes(List<Note> notes){
+        this.notes=notes;
+        notifyDataSetChanged();//Nicht so gut, wird später ersetzt
+    }
+
     class NoteHolder extends RecyclerView.ViewHolder{
         private TextView tvTitle;
         private TextView tvDescription;
