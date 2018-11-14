@@ -2,5 +2,23 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#ff9bbf</color>
+
+
+    <color name="zuckerDunkelBlau255">#364bff</color>
+    <color name="zuckerBlau255">#6c78ff</color>
+    <color name="zuckerBlauGruen255">#b988ffef</color>
+    <color name="zuckerGruen255">#26f100</color>
+    <color name="zuckerGruenGelb255">#dbff63</color>
+    <color name="zuckerGelb255">#fff42d</color>
+    <color name="zuckerGelbOrange255">#ffd863</color>
+    <color name="zuckerOrange255">#ff9e3d</color>
+    <color name="zuckerRot255">#96c10000</color>
+
+
+
+
+
+
+
 </resources>

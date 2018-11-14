@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.karstenfischer.room.roomdatabasegithubtest">
+    package="com.karstenfischerroom.room.roomdatabasediabetestest">
 
     <application
         android:allowBackup="true"
@@ -12,8 +12,11 @@
 
 
 
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTop">
+        <activity android:name="com.karstenfischerroom.room.roomdatabasediabetestest.MainActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/darktheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,8 +26,13 @@
 
 
 
-        <activity android:name=".AddEditNoteActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name="com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.AddEditEintragDiabetesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/darktheme"
+
+
+            android:parentActivityName="com.karstenfischerroom.room.roomdatabasediabetestest.MainActivity"/>
     </application>
 
 </manifest>
