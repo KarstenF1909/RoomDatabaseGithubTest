@@ -5,8 +5,8 @@ package com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "eintrag_diabetes_table")
-public class EintragDiabetes {
+@Entity(tableName = "note_table")
+public class Note {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
@@ -25,7 +25,7 @@ public class EintragDiabetes {
     private long eintragDatumMillis;
 
     //Constructor
-    public EintragDiabetes(String title, String description, int priority, int blutzucker,float be,float bolus,float korrektur,float basal,String datum,String uhrzeit,long currentTimeMillis,long eintragDatumMillis) {
+    public Note(String title, String description, int priority, int blutzucker, float be, float bolus, float korrektur, float basal, String datum, String uhrzeit, long currentTimeMillis, long eintragDatumMillis) {
         this.title = title;
         this.description = description;
         this.priority = priority;

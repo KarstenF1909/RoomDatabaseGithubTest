@@ -10,26 +10,33 @@ import java.util.List;
 
 public class EintragDiabetesViewModel extends AndroidViewModel {
     private EintragDiabetesRepository repository;
-    private LiveData<List<EintragDiabetes>> allNotes;
+    private LiveData<List<Note>> allNotes;
     public EintragDiabetesViewModel(@NonNull Application application) {
         super(application);
         repository=new EintragDiabetesRepository(application);
         allNotes=repository.getAllEintragDiabetes();
     }
-    public void insert(EintragDiabetes eintragDiabetes){
-        repository.insert(eintragDiabetes);
+    public void insert(Note note){
+        repository.insert(note);
     }
-    public void update(EintragDiabetes eintragDiabetes){
-        repository.update(eintragDiabetes);
+    public void update(Note note){
+        repository.update(note);
     }
-    public void delete(EintragDiabetes eintragDiabetes){
-        repository.delete(eintragDiabetes);
+    public void delete(Note note){
+
+
+
+        repository.delete(note);
+
+
+
+
     }
     public void deleteAllNotes(){
         repository.deleteAllEintragDiabetes();
     }
 
-    public LiveData<List<EintragDiabetes>> getAllEintragDiabetes() {
+    public LiveData<List<Note>> getAllEintragDiabetes() {
         return allNotes;
     }
 }

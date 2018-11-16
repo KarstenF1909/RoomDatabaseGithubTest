@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.AddEditEintragDiabetesActivity;
-import com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.EintragDiabetes;
+import com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.Note;
 import com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.EintragDiabetesAdapter;
 import com.karstenfischerroom.room.roomdatabasediabetestest.roomEintragDiabetes.EintragDiabetesViewModel;
 
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int ADD_NOTE_REQUEST=1;
     public static final int EDIT_NOTE_REQUEST=2;
     private EintragDiabetesViewModel eintragDiabetesViewModel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         eintragDiabetesViewModel =ViewModelProviders.of(this).get(EintragDiabetesViewModel.class);
-        eintragDiabetesViewModel.getAllEintragDiabetes().observe(this, new Observer<List<EintragDiabetes>>() {
+        eintragDiabetesViewModel.getAllEintragDiabetes().observe(this, new Observer<List<Note>>() {
             @Override
-            public void onChanged(@Nullable List<EintragDiabetes> eintragDiabetes) {
+            public void onChanged(@Nullable List<Note> eintragDiabetes) {
                 //update Recyclerview
                 adapter.submitList(eintragDiabetes);
 
@@ -70,27 +72,34 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-               eintragDiabetesViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Gelöscht", Toast.LENGTH_SHORT).show();
 
+               eintragDiabetesViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
+
+
+
+                Toast.makeText(MainActivity.this, "Gelöscht", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
         adapter.setOnItemClickListener(new EintragDiabetesAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(EintragDiabetes eintragDiabetes) {
+            public void onItemClick(Note note) {
                 Intent intent=new Intent(MainActivity.this,AddEditEintragDiabetesActivity.class);
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_ID, eintragDiabetes.getId());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_TITLE, eintragDiabetes.getTitle());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_DESCRIPTION, eintragDiabetes.getDescription());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_PRIORITY, eintragDiabetes.getPriority());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BLUTZUCKER, eintragDiabetes.getBlutzucker());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BE, eintragDiabetes.getBe());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_ID, note.getId());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_TITLE, note.getTitle());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_DESCRIPTION, note.getDescription());
 
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_DATUM, eintragDiabetes.getDatum());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_UHRZEIT, eintragDiabetes.getUhrzeit());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_CURRENT_TIME_MILLIS, eintragDiabetes.getCurrentTimeMillis());
-                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_EINTRAG_DATUM_MILLIS, eintragDiabetes.getEintragDatumMillis());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_PRIORITY, note.getPriority());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BLUTZUCKER, note.getBlutzucker());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BE, note.getBe());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BOLUS, note.getBolus());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_KORREKTUR, note.getKorrektur());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_BASAL, note.getBasal());
+
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_DATUM, note.getDatum());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_UHRZEIT, note.getUhrzeit());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_CURRENT_TIME_MILLIS, note.getCurrentTimeMillis());
+                intent.putExtra(AddEditEintragDiabetesActivity.EXTRA_EINTRAG_DATUM_MILLIS, note.getEintragDatumMillis());
 
 
 
@@ -127,15 +136,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            EintragDiabetes eintragDiabetes =new EintragDiabetes(title,description,priority,blutzucker,be,bolus,korrektur,basal,datum,uhrzeit,currentTimeMillis,eintragDatumMillis);
-            eintragDiabetesViewModel.insert(eintragDiabetes);
-            Toast.makeText(this, "EintragDiabetes saved", Toast.LENGTH_SHORT).show();
+            Note note =new Note(title,description,priority,blutzucker,be,bolus,korrektur,basal,datum,uhrzeit,currentTimeMillis,eintragDatumMillis);
+            eintragDiabetesViewModel.insert(note);
+            Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
         }
         else if(requestCode==EDIT_NOTE_REQUEST&&resultCode==RESULT_OK){
             int id=data.getIntExtra(AddEditEintragDiabetesActivity.EXTRA_ID,-1);
 
             if(id==-1){
-                Toast.makeText(this, "EintragDiabetes can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Note can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
             String title=data.getStringExtra(AddEditEintragDiabetesActivity.EXTRA_TITLE);
@@ -157,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            EintragDiabetes eintragDiabetes =new EintragDiabetes(title,description,priority,blutzucker,be,bolus,korrektur,basal,datum,uhrzeit,currentTimeMillis,eintragDatumMillis);
-            eintragDiabetes.setId(id);
-            eintragDiabetesViewModel.update(eintragDiabetes);
-            Toast.makeText(this, "EintragDiabetes updated", Toast.LENGTH_SHORT).show();
+            Note note =new Note(title,description,priority,blutzucker,be,bolus,korrektur,basal,datum,uhrzeit,currentTimeMillis,eintragDatumMillis);
+            note.setId(id);
+            eintragDiabetesViewModel.update(note);
+            Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(this, "Nothing saved", Toast.LENGTH_SHORT).show();

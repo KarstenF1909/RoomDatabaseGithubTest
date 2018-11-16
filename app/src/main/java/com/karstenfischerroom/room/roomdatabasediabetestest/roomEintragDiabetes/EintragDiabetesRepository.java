@@ -9,7 +9,7 @@ import java.util.List;
 //Repository
 public class EintragDiabetesRepository {
     private EintragDiabetesDao eintragDiabetesDao;
-    private LiveData<List<EintragDiabetes>> allEintragDiabetes;
+    private LiveData<List<Note>> allEintragDiabetes;
 
     public EintragDiabetesRepository(Application application) {
         EintragDiabetesDatabase database = EintragDiabetesDatabase.getInstance(application);
@@ -17,58 +17,58 @@ public class EintragDiabetesRepository {
         allEintragDiabetes = eintragDiabetesDao.getAllEintragDiabetes();
     }
 
-    public void insert(EintragDiabetes eintragDiabetes) {
-        new InsertEintragDiabetesAsyncTask(eintragDiabetesDao).execute(eintragDiabetes);
+    public void insert(Note note) {
+        new InsertEintragDiabetesAsyncTask(eintragDiabetesDao).execute(note);
 
     }
 
-    public void update(EintragDiabetes eintragDiabetes) {
-        new UpdateEintragDiabetesAsyncTask(eintragDiabetesDao).execute(eintragDiabetes);
+    public void update(Note note) {
+        new UpdateEintragDiabetesAsyncTask(eintragDiabetesDao).execute(note);
     }
 
-    public void delete(EintragDiabetes eintragDiabetes) {
-        new DeleteEintragDiabetesAsyncTask(eintragDiabetesDao).execute(eintragDiabetes);
+    public void delete(Note note) {
+        new DeleteEintragDiabetesAsyncTask(eintragDiabetesDao).execute(note);
     }
 
     public void deleteAllEintragDiabetes() {
         new DeleteAllEintragDiabetesAsyncTask(eintragDiabetesDao).execute();
     }
 
-    public LiveData<List<EintragDiabetes>> getAllEintragDiabetes() {
+    public LiveData<List<Note>> getAllEintragDiabetes() {
         return allEintragDiabetes;
     }
 
-    private static class InsertEintragDiabetesAsyncTask extends AsyncTask<EintragDiabetes, Void, Void> {
+    private static class InsertEintragDiabetesAsyncTask extends AsyncTask<Note, Void, Void> {
         private EintragDiabetesDao eintragDiabetesDao;
         private InsertEintragDiabetesAsyncTask(EintragDiabetesDao eintragDiabetesDao) {
             this.eintragDiabetesDao = eintragDiabetesDao;
         }
         @Override
-        protected Void doInBackground(EintragDiabetes... eintragDiabetes) {
+        protected Void doInBackground(Note... eintragDiabetes) {
             eintragDiabetesDao.insert(eintragDiabetes[0]);
             return null;
         }
     }
 
-    private static class UpdateEintragDiabetesAsyncTask extends AsyncTask<EintragDiabetes, Void, Void> {
+    private static class UpdateEintragDiabetesAsyncTask extends AsyncTask<Note, Void, Void> {
         private EintragDiabetesDao eintragDiabetesDao;
         private UpdateEintragDiabetesAsyncTask(EintragDiabetesDao eintragDiabetesDao) {
             this.eintragDiabetesDao = eintragDiabetesDao;
         }
         @Override
-        protected Void doInBackground(EintragDiabetes... eintragDiabetes) {
+        protected Void doInBackground(Note... eintragDiabetes) {
             eintragDiabetesDao.update(eintragDiabetes[0]);
             return null;
         }
     }
 
-    private static class DeleteEintragDiabetesAsyncTask extends AsyncTask<EintragDiabetes, Void, Void> {
+    private static class DeleteEintragDiabetesAsyncTask extends AsyncTask<Note, Void, Void> {
         private EintragDiabetesDao eintragDiabetesDao;
         private DeleteEintragDiabetesAsyncTask(EintragDiabetesDao eintragDiabetesDao) {
             this.eintragDiabetesDao = eintragDiabetesDao;
         }
         @Override
-        protected Void doInBackground(EintragDiabetes... eintragDiabetes) {
+        protected Void doInBackground(Note... eintragDiabetes) {
             eintragDiabetesDao.delete(eintragDiabetes[0]);
             return null;
         }

@@ -14,17 +14,17 @@ import java.util.List;
 public interface EintragDiabetesDao {
 
     @Insert
-    void insert(EintragDiabetes eintragDiabetes);
+    void insert(Note note);
 
     @Update
-    void update(EintragDiabetes eintragDiabetes);
+    void update(Note note);
 
     @Delete
-    void delete(EintragDiabetes eintragDiabetes);
+    void delete(Note note);
 
-    @Query("DELETE FROM eintrag_diabetes_table")
+    @Query("DELETE FROM note_table")
     void deleteAllEintragDiabetes();
 
-    @Query("SELECT * FROM eintrag_diabetes_table ORDER BY currentTimeMillis DESC")
-    LiveData<List<EintragDiabetes>> getAllEintragDiabetes();
+    @Query("SELECT * FROM note_table ORDER BY currentTimeMillis DESC")
+    LiveData<List<Note>> getAllEintragDiabetes();
 }

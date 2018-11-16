@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
-@Database(entities = {EintragDiabetes.class}, version = 1)
+@Database(entities = {Note.class}, version = 1)
 public abstract class EintragDiabetesDatabase extends RoomDatabase {
 
     private static EintragDiabetesDatabase instance;
@@ -45,7 +45,7 @@ public abstract class EintragDiabetesDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            eintragDiabetesDao.insert(new EintragDiabetes("Title 1",
+            eintragDiabetesDao.insert(new Note("Title 1",
                     "Description 1",
                     1,
                     111,

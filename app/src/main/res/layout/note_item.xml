@@ -59,70 +59,144 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-
-        <TextView
-            android:id="@+id/tvBlutzucker"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="?attr/textcolor1"
-            android:layout_marginTop="32dp"
-            android:text="Blutzucker"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="?attr/cardbackground1"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription">
 
-        <TextView
-            android:id="@+id/tvBe"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textColor="?attr/textcolor1"
-            android:layout_marginTop="2dp"
-            android:text="Be"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBlutzucker" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvBolus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:text="Bolus"
-            android:textColor="?attr/textcolor1"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBe" />
+                <TextView
+                    android:id="@+id/tvBlutzucker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-        <TextView
-            android:id="@+id/tvKorrektur"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:textColor="?attr/textcolor1"
-            android:text="Korrektur"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBolus" />
+                    android:layout_marginStart="8dp"
+                    android:text="Blutzucker: "
+                    android:textColor="?attr/textcolor1"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvBlutzuckerWert"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tvBasal"
-            android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tvBlutzuckerWert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="123"
+                    android:textSize="36sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvBlutzucker"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
-            android:text="Basal"
-            android:textColor="?attr/textcolor1"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="?attr/cardbackground1"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvKorrektur" />
+            app:layout_constraintTop_toBottomOf="@+id/cv1">
 
+            <TextView
+                android:id="@+id/tvBe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Be"
+                android:textColor="?attr/textcolor1"
+
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="?attr/cardbackground1"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv2">
+
+            <TextView
+                android:id="@+id/tvBolus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Bolus"
+                android:textColor="?attr/textcolor1" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="?attr/cardbackground1"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv3">
+
+            <TextView
+                android:id="@+id/tvKorrektur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Korrektur"
+                android:textColor="?attr/textcolor1" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="?attr/cardbackground1"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv4">
+
+            <TextView
+                android:id="@+id/tvBasal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+
+                android:text="Basal"
+                android:textColor="?attr/textcolor1" />
+        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -170,15 +244,7 @@
             app:layout_constraintStart_toEndOf="@+id/tvCurrentTimeMillis"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvBlutzuckerWert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="123"
-            android:textSize="36sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tvBlutzucker"
-            app:layout_constraintStart_toEndOf="@+id/tvBlutzucker" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

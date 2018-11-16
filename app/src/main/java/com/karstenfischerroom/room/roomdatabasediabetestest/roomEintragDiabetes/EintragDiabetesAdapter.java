@@ -6,52 +6,42 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.karstenfischerroom.room.roomdatabasediabetestest.MainActivity;
 import com.karstenfischerroom.room.roomdatabasediabetestest.R;
 
-public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, EintragDiabetesAdapter.NoteHolder> {
+public class EintragDiabetesAdapter extends ListAdapter<Note, EintragDiabetesAdapter.NoteHolder> {
 
-    //private List<EintragDiabetes> notes=new ArrayList<>();   nicht mehr wichtig
+    //private List<Note> notes=new ArrayList<>();   nicht mehr wichtig
     private OnItemClickListener listener;
 
     public EintragDiabetesAdapter() {
         super(DIFF_CALLBACK);
     }
 
-    private static final DiffUtil.ItemCallback<EintragDiabetes> DIFF_CALLBACK = new DiffUtil.ItemCallback<EintragDiabetes>() {
+    private static final DiffUtil.ItemCallback<Note> DIFF_CALLBACK = new DiffUtil.ItemCallback<Note>() {
         @Override
-        public boolean areItemsTheSame(@NonNull EintragDiabetes eintragDiabetes, @NonNull EintragDiabetes t1) {
-            return eintragDiabetes.getId() == t1.getId();
+        public boolean areItemsTheSame(@NonNull Note note, @NonNull Note t1) {
+            return note.getId() == t1.getId();
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull EintragDiabetes eintragDiabetes, @NonNull EintragDiabetes t1) {
-            return eintragDiabetes.getTitle().equals(t1.getTitle()) &&
-                    eintragDiabetes.getDescription().equals(t1.getDescription()) &&
-                    eintragDiabetes.getPriority() == t1.getPriority() &&
-                    eintragDiabetes.getBlutzucker() == t1.getBlutzucker() &&
-                    eintragDiabetes.getBe() == t1.getBe();
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public boolean areContentsTheSame(@NonNull Note note, @NonNull Note t1) {
+            return note.getTitle().equals(t1.getTitle()) &&
+                    note.getDescription().equals(t1.getDescription()) &&
+                    note.getPriority() == t1.getPriority() &&
+                    note.getBlutzucker() == t1.getBlutzucker() &&
+                    note.getBe() == t1.getBe() &&
+                    note.getBolus() == t1.getBolus() &&
+                    note.getKorrektur() == t1.getKorrektur() &&
+                    note.getBasal() == t1.getBasal() &&
+                    note.getDatum().equals(t1.getDatum()) &&
+                    note.getUhrzeit().equals(t1.getUhrzeit()) &&
+                    note.getCurrentTimeMillis() == t1.getCurrentTimeMillis() &&
+                    note.getEintragDatumMillis() == t1.getEintragDatumMillis();
         }
     };
 
@@ -65,65 +55,108 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
 
     @Override
     public void onBindViewHolder(@NonNull NoteHolder noteHolder, int position) {
-        EintragDiabetes currentEintragDiabetes = getItem(position);
-        noteHolder.tvTitle.setText(currentEintragDiabetes.getTitle());
-        noteHolder.tvDescription.setText(currentEintragDiabetes.getDescription());
-        noteHolder.tvPriority.setText(String.valueOf(currentEintragDiabetes.getPriority()));
-
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-
-        SpannableString str1= new SpannableString("Blutzucker  ");
-        //str1.setSpan(new ForegroundColorSpan(Color.DKGRAY), 0, str1.length(), 0);
-        str1.setSpan(new ForegroundColorSpan(Color.GREEN), 0, str1.length(), 0);
-        builder.append(str1);
-
-        SpannableString str2= new SpannableString(String.valueOf(currentEintragDiabetes.getBlutzucker()));
-
-        if(currentEintragDiabetes.getBlutzucker()>150){
-            str2.setSpan(new ForegroundColorSpan(Color.MAGENTA), 0, str2.length(), 0);
-
-        }
-        else{
-            str2.setSpan(new ForegroundColorSpan(Color.GREEN), 0, str2.length(), 0);
-
-        }
-
-
-
-        builder.append(str2);
-
-       //
-        //tv.setText( builder, TextView.BufferType.SPANNABLE);
 
 
 
 
-        if(currentEintragDiabetes.getBlutzucker()>150){
+        Note currentNote = getItem(position);
+
+        if(currentNote.getBlutzucker()>150){
             //noteHolder.tvBlutzuckerWert.setTextColor(Color.MAGENTA);
             //noteHolder.tvBlutzuckerWert.setTextColor(Color.rgb(100,62,24));
             noteHolder.tvBlutzuckerWert.setTextColor(Color.argb(100,255,158,61));
         }
-        else{
+        if(currentNote.getBlutzucker()>300){
+            //noteHolder.tvBlutzuckerWert.setTextColor(Color.MAGENTA);
+            //noteHolder.tvBlutzuckerWert.setTextColor(Color.rgb(100,62,24));
+            noteHolder.tvBlutzuckerWert.setTextColor(Color.argb(100,255,0,0));
+        }
+        if(currentNote.getBlutzucker()<150){
 
             //noteHolder.tvBlutzuckerWert.setTextColor(Color.GREEN);
             noteHolder.tvBlutzuckerWert.setTextColor(Color.rgb(116,255,61));
         }
 
+
+
+
+        noteHolder.tvPriority.setText(String.valueOf(currentNote.getPriority()));
+
+        //noteHolder.tvBlutzuckerWert.setText(String.valueOf(currentNote.getBlutzucker()));
+        noteHolder.tvBe.setText(String.valueOf(currentNote.getBe()));
+        noteHolder.tvBolus.setText(String.valueOf(currentNote.getBolus()));
+        noteHolder.tvKorrektur.setText(String.valueOf(currentNote.getKorrektur()));
+        noteHolder.tvBasal.setText(String.valueOf(currentNote.getBasal()));
+        noteHolder.tvDatum.setText(String.valueOf(currentNote.getDatum()));
+        noteHolder.tvUhrzeit.setText(String.valueOf(currentNote.getUhrzeit()));
+        noteHolder.tvCurrentTimeMillis.setText(String.valueOf(currentNote.getCurrentTimeMillis()));
+        noteHolder.tvEintragDatumMillis.setText(String.valueOf(currentNote.getEintragDatumMillis()));
+
+        //SpannableStringBuilder builder = new SpannableStringBuilder();
+//
+        //SpannableString str1= new SpannableString("Blutzucker  ");
+        //str1.setSpan(new ForegroundColorSpan(Color.DKGRAY), 0, str1.length(), 0);
+        //str1.setSpan(new ForegroundColorSpan(Color.GREEN), 0, str1.length(), 0);
+        //builder.append(str1);
+
+
+
+       // SpannableString str2= new SpannableString(String.valueOf(currentNote.getBlutzucker()));
+//
+       // if(currentNote.getBlutzucker()>150){
+       //     str2.setSpan(new ForegroundColorSpan(Color.MAGENTA), 0, str2.length(), 0);
+//
+       // }
+       // else{
+       //     str2.setSpan(new ForegroundColorSpan(Color.GREEN), 0, str2.length(), 0);
+//
+       // }
+//
+//
+//
+       // builder.append(str2);
+//
+      //
+       // tv.setText( builder, TextView.BufferType.SPANNABLE);
+
+
+
         noteHolder.tvBlutzucker.setText("Blutzucker: ");
-        noteHolder.tvBlutzuckerWert.setText(""+String.valueOf(currentEintragDiabetes.getBlutzucker()));
+        noteHolder.tvBlutzuckerWert.setText(String.format("%s", String.valueOf(currentNote.getBlutzucker())));
 
         //  noteHolder.tvBlutzucker.setText( builder, TextView.BufferType.SPANNABLE);
 
-        if(currentEintragDiabetes.getBe()!=0){
-            noteHolder.tvBe.setText("Broteinheiten - "+String.valueOf(currentEintragDiabetes.getBe()));
+
+        noteHolder.tvDescription.setText(currentNote.getDescription());
+
+
+
+
+
+        if(!currentNote.getTitle().trim().isEmpty()){
+            noteHolder.tvTitle.setText(currentNote.getTitle());
+        }
+        else {
+            noteHolder.tvTitle.setVisibility(View.GONE);
+        }
+        if(!currentNote.getDescription().trim().isEmpty()){
+            noteHolder.tvDescription.setText(currentNote.getDescription());
+        }
+        else {
+            noteHolder.tvDescription.setVisibility(View.GONE);
+        }
+
+
+        if(currentNote.getBe()!=0){
+            noteHolder.tvBe.setText("Broteinheiten - "+String.valueOf(currentNote.getBe()));
         }
         else {
             noteHolder.tvBe.setVisibility(View.GONE);
         }
 
 
-        if(currentEintragDiabetes.getBolus()!=0){
-            noteHolder.tvBolus.setText("Bolus - "+String.valueOf(currentEintragDiabetes.getBolus()));
+        if(currentNote.getBolus()!=0){
+            noteHolder.tvBolus.setText("Bolus - "+String.valueOf(currentNote.getBolus()));
         }
         else {
             noteHolder.tvBolus.setVisibility(View.GONE);
@@ -131,8 +164,8 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
 
 
 
-        if(currentEintragDiabetes.getKorrektur()!=0){
-            noteHolder.tvKorrektur.setText("Korrektur - "+String.valueOf(currentEintragDiabetes.getKorrektur()));
+        if(currentNote.getKorrektur()!=0){
+            noteHolder.tvKorrektur.setText("Korrektur - "+String.valueOf(currentNote.getKorrektur()));
         }
         else {
             noteHolder.tvKorrektur.setVisibility(View.GONE);
@@ -140,8 +173,8 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
 
 
 
-        if(currentEintragDiabetes.getBasal()!=0){
-            noteHolder.tvBasal.setText("Basal - "+String.valueOf(currentEintragDiabetes.getBasal()));
+        if(currentNote.getBasal()!=0){
+            noteHolder.tvBasal.setText("Basal - "+String.valueOf(currentNote.getBasal()));
         }
         else {
             noteHolder.tvBasal.setVisibility(View.GONE);
@@ -155,10 +188,10 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
 
 
 
-        noteHolder.tvDatum.setText(String.valueOf(currentEintragDiabetes.getDatum()));
-        noteHolder.tvUhrzeit.setText(String.valueOf(currentEintragDiabetes.getUhrzeit()));
-        noteHolder.tvCurrentTimeMillis.setText(String.valueOf(currentEintragDiabetes.getCurrentTimeMillis()));
-        noteHolder.tvEintragDatumMillis.setText(String.valueOf(currentEintragDiabetes.getEintragDatumMillis()));
+        noteHolder.tvDatum.setText(String.valueOf(currentNote.getDatum()));
+        noteHolder.tvUhrzeit.setText(String.valueOf(currentNote.getUhrzeit()));
+        noteHolder.tvCurrentTimeMillis.setText(String.valueOf(currentNote.getCurrentTimeMillis()));
+        noteHolder.tvEintragDatumMillis.setText(String.valueOf(currentNote.getEintragDatumMillis()));
 
 
 
@@ -172,7 +205,7 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
 
 
     //Für onSwipe
-    public EintragDiabetes getNoteAt(int position) {
+    public Note getNoteAt(int position) {
         return getItem(position);
     }
 
@@ -236,7 +269,7 @@ public class EintragDiabetesAdapter extends ListAdapter<EintragDiabetes, Eintrag
     }
 
     public interface OnItemClickListener {
-        void onItemClick(EintragDiabetes eintragDiabetes);
+        void onItemClick(Note note);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
